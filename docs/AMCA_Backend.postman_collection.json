@@ -1,0 +1,134 @@
+{
+  "info": {
+    "_postman_id": "2d9f2c9e-7c7a-4a1a-9c8e-6bfb0c8f1234",
+    "name": "AMCA Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Colección de pruebas para apollo_al_mercado_campesino (Laravel)"
+  },
+  "item": [
+    {
+      "name": "Animales",
+      "item": [
+        {
+          "name": "GET /animales",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{base_url}}/animales", "host": ["{{base_url}}"], "path": ["animales"] }
+          }
+        },
+        {
+          "name": "POST /guardar_animal (crear)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {"key": "especie", "value": "Bovino", "type": "text"},
+                {"key": "raza", "value": "Holstein", "type": "text"},
+                {"key": "alimentacion", "value": "Pasto y concentrado", "type": "text"},
+                {"key": "cuidados", "value": "Vacunación anual", "type": "text"},
+                {"key": "reproduccion", "value": "Monta natural", "type": "text"},
+                {"key": "observacion", "value": "Ejemplo de registro", "type": "text"}
+              ]
+            },
+            "url": { "raw": "{{base_url}}/guardar_animal", "host": ["{{base_url}}"], "path": ["guardar_animal"] }
+          }
+        },
+        {
+          "name": "POST /guardar_animal (actualizar)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {"key": "id_edita", "value": "1", "type": "text"},
+                {"key": "especie", "value": "Bovino", "type": "text"},
+                {"key": "raza", "value": "Jersey", "type": "text"},
+                {"key": "alimentacion", "value": "Pasto", "type": "text"},
+                {"key": "cuidados", "value": "Refuerzo vacunas", "type": "text"},
+                {"key": "reproduccion", "value": "IA", "type": "text"},
+                {"key": "observacion", "value": "Actualización", "type": "text"}
+              ]
+            },
+            "url": { "raw": "{{base_url}}/guardar_animal", "host": ["{{base_url}}"], "path": ["guardar_animal"] }
+          }
+        },
+        {
+          "name": "POST /animal_eliminar",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/x-www-form-urlencoded"}],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [ {"key": "id_elimina", "value": "1", "type": "text"} ]
+            },
+            "url": { "raw": "{{base_url}}/animal_eliminar", "host": ["{{base_url}}"], "path": ["animal_eliminar"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vegetales",
+      "item": [
+        {"name": "GET /vegetales", "request": {"method": "GET", "url": {"raw": "{{base_url}}/vegetales", "host": ["{{base_url}}"], "path": ["vegetales"]}}},
+        {"name": "POST /vegetales_guardar (crear)", "request": {"method": "POST", "body": {"mode": "formdata", "formdata": [{"key": "especie", "value": "Tomate", "type": "text"}, {"key": "cultivo", "value": "A cielo abierto", "type": "text"}, {"key": "observaciones", "value": "Rojo y resistente", "type": "text"}]}, "url": {"raw": "{{base_url}}/vegetales_guardar", "host": ["{{base_url}}"], "path": ["vegetales_guardar"]}}},
+        {"name": "POST /vegetales_guardar (actualizar)", "request": {"method": "POST", "body": {"mode": "formdata", "formdata": [{"key": "id_edita", "value": "1", "type": "text"}, {"key": "especie", "value": "Tomate", "type": "text"}, {"key": "cultivo", "value": "Invernadero", "type": "text"}, {"key": "observaciones", "value": "Variedad cherry", "type": "text"}]}, "url": {"raw": "{{base_url}}/vegetales_guardar", "host": ["{{base_url}}"], "path": ["vegetales_guardar"]}}},
+        {"name": "POST /vegetales_eliminar", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/x-www-form-urlencoded"}], "body": {"mode": "urlencoded", "urlencoded": [{"key": "id_elimina", "value": "1"}]}, "url": {"raw": "{{base_url}}/vegetales_eliminar", "host": ["{{base_url}}"], "path": ["vegetales_eliminar"]}}}
+      ]
+    },
+    {
+      "name": "Preparados",
+      "item": [
+        {"name": "GET /preparados", "request": {"method": "GET", "url": {"raw": "{{base_url}}/preparados", "host": ["{{base_url}}"], "path": ["preparados"]}}},
+        {"name": "POST /preparados_guardar (crear)", "request": {"method": "POST", "body": {"mode": "formdata", "formdata": [{"key": "nombre", "value": "Queso", "type": "text"}, {"key": "preparacion", "value": "Cuajado", "type": "text"}, {"key": "observaciones", "value": "Maduración 30 días", "type": "text"}]}, "url": {"raw": "{{base_url}}/preparados_guardar", "host": ["{{base_url}}"], "path": ["preparados_guardar"]}}},
+        {"name": "POST /preparados_guardar (actualizar)", "request": {"method": "POST", "body": {"mode": "formdata", "formdata": [{"key": "id_edita", "value": "1", "type": "text"}, {"key": "nombre", "value": "Queso fresco", "type": "text"}, {"key": "preparacion", "value": "Cuajado rápido", "type": "text"}, {"key": "observaciones", "value": "Consumo inmediato", "type": "text"}]}, "url": {"raw": "{{base_url}}/preparados_guardar", "host": ["{{base_url}}"], "path": ["preparados_guardar"]}}},
+        {"name": "POST /preparados_eliminar", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/x-www-form-urlencoded"}], "body": {"mode": "urlencoded", "urlencoded": [{"key": "id_elimina", "value": "1"}]}, "url": {"raw": "{{base_url}}/preparados_eliminar", "host": ["{{base_url}}"], "path": ["preparados_eliminar"]}}}
+      ]
+    },
+    {
+      "name": "Agricultores",
+      "item": [
+        {"name": "GET /agricultores", "request": {"method": "GET", "url": {"raw": "{{base_url}}/agricultores", "host": ["{{base_url}}"], "path": ["agricultores"]}}},
+        {"name": "POST /agricultores_guardar (crear)", "request": {"method": "POST", "body": {"mode": "formdata", "formdata": [{"key": "nombres", "value": "Juan", "type": "text"}, {"key": "apellidos", "value": "Pérez", "type": "text"}, {"key": "telefono", "value": "3000000000", "type": "text"}, {"key": "documento", "value": "CC123", "type": "text"}]}, "url": {"raw": "{{base_url}}/agricultores_guardar", "host": ["{{base_url}}"], "path": ["agricultores_guardar"]}}},
+        {"name": "POST /agricultores_guardar (actualizar)", "request": {"method": "POST", "body": {"mode": "formdata", "formdata": [{"key": "id_edita", "value": "1", "type": "text"}, {"key": "nombres", "value": "Juan", "type": "text"}, {"key": "apellidos", "value": "García", "type": "text"}, {"key": "telefono", "value": "3010000000", "type": "text"}, {"key": "documento", "value": "CC123", "type": "text"}]}, "url": {"raw": "{{base_url}}/agricultores_guardar", "host": ["{{base_url}}"], "path": ["agricultores_guardar"]}}},
+        {"name": "POST /agricultores_eliminar", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/x-www-form-urlencoded"}], "body": {"mode": "urlencoded", "urlencoded": [{"key": "id_elimina", "value": "1"}]}, "url": {"raw": "{{base_url}}/agricultores_eliminar", "host": ["{{base_url}}"], "path": ["agricultores_eliminar"]}}}
+      ]
+    },
+    {
+      "name": "Fincas",
+      "item": [
+        {"name": "GET /finca", "request": {"method": "GET", "url": {"raw": "{{base_url}}/finca", "host": ["{{base_url}}"], "path": ["finca"]}}},
+        {"name": "POST /finca_guardar (crear)", "request": {"method": "POST", "body": {"mode": "formdata", "formdata": [{"key": "nombre", "value": "La Esperanza", "type": "text"}, {"key": "ubicacion", "value": "Boyacá", "type": "text"}, {"key": "propietario", "value": "Pedro", "type": "text"}]}, "url": {"raw": "{{base_url}}/finca_guardar", "host": ["{{base_url}}"], "path": ["finca_guardar"]}}},
+        {"name": "POST /finca_guardar (actualizar)", "request": {"method": "POST", "body": {"mode": "formdata", "formdata": [{"key": "id_edita", "value": "1", "type": "text"}, {"key": "nombre", "value": "La Bonita", "type": "text"}, {"key": "ubicacion", "value": "Cundinamarca", "type": "text"}, {"key": "propietario", "value": "Pedro", "type": "text"}]}, "url": {"raw": "{{base_url}}/finca_guardar", "host": ["{{base_url}}"], "path": ["finca_guardar"]}}},
+        {"name": "POST /finca_eliminar", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/x-www-form-urlencoded"}], "body": {"mode": "urlencoded", "urlencoded": [{"key": "id_elimina", "value": "1"}]}, "url": {"raw": "{{base_url}}/finca_eliminar", "host": ["{{base_url}}"], "path": ["finca_eliminar"]}}}
+      ]
+    },
+    {
+      "name": "Relaciones por Agricultor",
+      "item": [
+        {"name": "GET /fincas_agricultor/{id}", "request": {"method": "GET", "url": {"raw": "{{base_url}}/fincas_agricultor/1", "host": ["{{base_url}}"], "path": ["fincas_agricultor", "1"]}}},
+        {"name": "POST /fincas_agricultor_guardar", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"id_agricultor\": 1,\n  \"fincas_agrega\": [2,3]\n}"}, "url": {"raw": "{{base_url}}/fincas_agricultor_guardar", "host": ["{{base_url}}"], "path": ["fincas_agricultor_guardar"]}}},
+        {"name": "POST /fincas_agricultor_eliminar", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/x-www-form-urlencoded"}], "body": {"mode": "urlencoded", "urlencoded": [{"key": "id_registro", "value": "1"}]}, "url": {"raw": "{{base_url}}/fincas_agricultor_eliminar", "host": ["{{base_url}}"], "path": ["fincas_agricultor_eliminar"]}}},
+
+        {"name": "GET /animales_agricultor/{id}", "request": {"method": "GET", "url": {"raw": "{{base_url}}/animales_agricultor/1", "host": ["{{base_url}}"], "path": ["animales_agricultor", "1"]}}},
+        {"name": "POST /animales_agricultor_guardar", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"id_agricultor\": 1,\n  \"animales_agrega\": [1,2]\n}"}, "url": {"raw": "{{base_url}}/animales_agricultor_guardar", "host": ["{{base_url}}"], "path": ["animales_agricultor_guardar"]}}},
+        {"name": "POST /animales_agricultor_eliminar", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/x-www-form-urlencoded"}], "body": {"mode": "urlencoded", "urlencoded": [{"key": "id_registro", "value": "1"}]}, "url": {"raw": "{{base_url}}/animales_agricultor_eliminar", "host": ["{{base_url}}"], "path": ["animales_agricultor_eliminar"]}}},
+
+        {"name": "GET /vegetales_agricultor/{id}", "request": {"method": "GET", "url": {"raw": "{{base_url}}/vegetales_agricultor/1", "host": ["{{base_url}}"], "path": ["vegetales_agricultor", "1"]}}},
+        {"name": "POST /vegetales_agricultor_guardar", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"id_agricultor\": 1,\n  \"vegetales_agrega\": [1,2]\n}"}, "url": {"raw": "{{base_url}}/vegetales_agricultor_guardar", "host": ["{{base_url}}"], "path": ["vegetales_agricultor_guardar"]}}},
+        {"name": "POST /vegetales_agricultor_eliminar", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/x-www-form-urlencoded"}], "body": {"mode": "urlencoded", "urlencoded": [{"key": "id_registro", "value": "1"}]}, "url": {"raw": "{{base_url}}/vegetales_agricultor_eliminar", "host": ["{{base_url}}"], "path": ["vegetales_agricultor_eliminar"]}}},
+
+        {"name": "GET /preparados_agricultor/{id}", "request": {"method": "GET", "url": {"raw": "{{base_url}}/preparados_agricultor/1", "host": ["{{base_url}}"], "path": ["preparados_agricultor", "1"]}}},
+        {"name": "POST /preparados_agricultor_guardar", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"id_agricultor\": 1,\n  \"preparados_agrega\": [1,2]\n}"}, "url": {"raw": "{{base_url}}/preparados_agricultor_guardar", "host": ["{{base_url}}"], "path": ["preparados_agricultor_guardar"]}}},
+        {"name": "POST /preparados_agricultor_eliminar", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/x-www-form-urlencoded"}], "body": {"mode": "urlencoded", "urlencoded": [{"key": "id_registro", "value": "1"}]}, "url": {"raw": "{{base_url}}/preparados_agricultor_eliminar", "host": ["{{base_url}}"], "path": ["preparados_agricultor_eliminar"]}}}
+      ]
+    }
+  ],
+  "event": [],
+  "variable": [
+    {"key": "base_url", "value": "http://127.0.0.1:8000"}
+  ]
+}

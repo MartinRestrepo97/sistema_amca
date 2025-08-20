@@ -1,0 +1,61 @@
+{
+  "info": {
+    "name": "AMCA REST API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Animales",
+      "item": [
+        {"name":"Listar","request":{"url":"{{base_url}}/api/animales","method":"GET"}},
+        {"name":"Crear","request":{"url":"{{base_url}}/api/animales","method":"POST","body":{"mode":"formdata","formdata":[{"key":"especie","value":"Vaca","type":"text"},{"key":"raza","value":"Criolla","type":"text"},{"key":"imagen","type":"file"}]}}},
+        {"name":"Mostrar","request":{"url":"{{base_url}}/api/animales/1","method":"GET"}},
+        {"name":"Actualizar","request":{"url":"{{base_url}}/api/animales/1","method":"PUT","body":{"mode":"raw","raw":"{\n  \"raza\": \"Holstein\"\n}","options":{"raw":{"language":"json"}}}}},
+        {"name":"Eliminar","request":{"url":"{{base_url}}/api/animales/1","method":"DELETE"}}
+      ]
+    },
+    {
+      "name": "Vegetales",
+      "item": [
+        {"name":"Listar","request":{"url":"{{base_url}}/api/vegetales","method":"GET"}},
+        {"name":"Crear","request":{"url":"{{base_url}}/api/vegetales","method":"POST","body":{"mode":"formdata","formdata":[{"key":"especie","value":"Tomate","type":"text"},{"key":"imagen","type":"file"}]}}},
+        {"name":"Mostrar","request":{"url":"{{base_url}}/api/vegetales/1","method":"GET"}},
+        {"name":"Actualizar","request":{"url":"{{base_url}}/api/vegetales/1","method":"PATCH","body":{"mode":"raw","raw":"{\n  \"cultivo\": \"Hidroponia\"\n}","options":{"raw":{"language":"json"}}}}},
+        {"name":"Eliminar","request":{"url":"{{base_url}}/api/vegetales/1","method":"DELETE"}}
+      ]
+    },
+    {
+      "name": "Preparados",
+      "item": [
+        {"name":"Listar","request":{"url":"{{base_url}}/api/preparados","method":"GET"}},
+        {"name":"Crear","request":{"url":"{{base_url}}/api/preparados","method":"POST","body":{"mode":"formdata","formdata":[{"key":"nombre","value":"Mermelada","type":"text"},{"key":"imagen","type":"file"}]}}},
+        {"name":"Mostrar","request":{"url":"{{base_url}}/api/preparados/1","method":"GET"}},
+        {"name":"Actualizar","request":{"url":"{{base_url}}/api/preparados/1","method":"PUT","body":{"mode":"raw","raw":"{\n  \"observaciones\": \"Artesanal\"\n}","options":{"raw":{"language":"json"}}}}},
+        {"name":"Eliminar","request":{"url":"{{base_url}}/api/preparados/1","method":"DELETE"}}
+      ]
+    },
+    {
+      "name": "Agricultores",
+      "item": [
+        {"name":"Listar","request":{"url":"{{base_url}}/api/agricultores","method":"GET"}},
+        {"name":"Crear","request":{"url":"{{base_url}}/api/agricultores","method":"POST","body":{"mode":"formdata","formdata":[{"key":"nombres","value":"Juan","type":"text"},{"key":"documento","value":"CC123","type":"text"},{"key":"imagen","type":"file"}]}}},
+        {"name":"Mostrar","request":{"url":"{{base_url}}/api/agricultores/1","method":"GET"}},
+        {"name":"Actualizar","request":{"url":"{{base_url}}/api/agricultores/1","method":"PATCH","body":{"mode":"raw","raw":"{\n  \"telefono\": \"3000000000\"\n}","options":{"raw":{"language":"json"}}}}},
+        {"name":"Eliminar","request":{"url":"{{base_url}}/api/agricultores/1","method":"DELETE"}}
+      ]
+    },
+    {
+      "name": "Fincas",
+      "item": [
+        {"name":"Listar","request":{"url":"{{base_url}}/api/fincas","method":"GET"}},
+        {"name":"Crear","request":{"url":"{{base_url}}/api/fincas","method":"POST","body":{"mode":"formdata","formdata":[{"key":"nombre","value":"La Esperanza","type":"text"},{"key":"imagen","type":"file"}]}}},
+        {"name":"Mostrar","request":{"url":"{{base_url}}/api/fincas/1","method":"GET"}},
+        {"name":"Actualizar","request":{"url":"{{base_url}}/api/fincas/1","method":"PUT","body":{"mode":"raw","raw":"{\n  \"ubicacion\": \"Valle del Cauca\"\n}","options":{"raw":{"language":"json"}}}}},
+        {"name":"Eliminar","request":{"url":"{{base_url}}/api/fincas/1","method":"DELETE"}}
+      ]
+    }
+  ],
+  "variable": [
+    {"key":"base_url","value":"http://127.0.0.1:8000"}
+  ]
+}
