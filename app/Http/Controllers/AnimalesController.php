@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Animal;
+use App\Models\Animal;
 
 class AnimalesController extends Controller
 {
@@ -35,14 +35,21 @@ class AnimalesController extends Controller
         $registro->observaciones = $request['observacion'];     
         $registro->save();
 
-        if (isset($_FILES["imagen"]["tmp_name"]) && $_FILES["imagen"]["tmp_name"] !='') {
+        if (isset($_FILES["imagen"]["tmp_name"]) && $_FILES["imagen"]["tmp_name"] != '') {
             $tmp_name = $_FILES["imagen"]["tmp_name"];
             $name = $_FILES["imagen"]["name"];
-            
-            move_uploaded_file($tmp_name, "img/animales/".$registro->id."_$name");
+            $fileName = $registro->id . "_" . $name;
 
-            $registro->imagen = $registro->id."_$name";
-            $registro->save();
+            $destDir = public_path('img/animales');
+            if (!is_dir($destDir)) {
+                @mkdir($destDir, 0755, true);
+            }
+
+            $destPath = $destDir . DIRECTORY_SEPARATOR . $fileName;
+            if (@move_uploaded_file($tmp_name, $destPath)) {
+                $registro->imagen = $fileName; // La vista debe usar "/img/animales/{$registro->imagen}"
+                $registro->save();
+            }
         }
         
 

@@ -1,7 +1,7 @@
 # Evidencia de Testing de API (Laravel)
 
-Proyecto: `apollo_al_mercado_campesino`
-Base URL local: `http://127.0.0.1:8000`
+Proyecto: `sistema_amca`
+Base URL local: `http://localhost/sistema_amca/public`
 
 
 ## 1) Introducción
@@ -49,6 +49,7 @@ php artisan migrate
 ```
 php artisan serve --host=127.0.0.1 --port=8000
 ```
+  - Nota (MAMP/Apache): si usas MAMP con VirtualHost/alias, la base local suele ser `http://localhost/sistema_amca/public`.
 
 Verificación de BD:
 - MySQL (MAMP): usar phpMyAdmin o MySQL Workbench para ver tablas y cambios.
@@ -346,6 +347,53 @@ curl -X PATCH "{{base_url}}/api/animales/1" \
 # Eliminar
 curl -X DELETE "{{base_url}}/api/animales/1"
 ```
+
+### 10.1 Evidencia de cargas de imágenes (API `/api/*`)
+- Todas las cargas usan campo `imagen` y guardan archivos en `public/img/<tipo>/` con nombre `<id>_<original>`.
+- Sustituye rutas de archivo de ejemplo por archivos existentes en tu máquina.
+
+```bash
+# 1) Animales
+curl -X POST "{{base_url}}/api/animales" \
+  -F especie="Vaca" \
+  -F raza="Holstein" \
+  -F alimentacion="Pasto" \
+  -F cuidados="Vacunas" \
+  -F reproduccion="Natural" \
+  -F observacion="Sana" \
+  -F imagen=@"/path/to/test-animal.jpg"
+# Esperado: 201 JSON; archivo en public/img/animales/<id>_test-animal.jpg
+
+# 2) Vegetales
+curl -X POST "{{base_url}}/api/vegetales" \
+  -F especie="Tomate" \
+  -F cultivo="Invernadero" \
+  -F observaciones="Rojo" \
+  -F imagen=@"/path/to/test-vegetal.jpg"
+# Esperado: 201 JSON; archivo en public/img/vegetales/<id>_test-vegetal.jpg
+
+# 3) Preparados
+curl -X POST "{{base_url}}/api/preparados" \
+  -F nombre="Mermelada" \
+  -F preparacion="Cocción" \
+  -F observaciones="Artesanal" \
+  -F imagen=@"/path/to/test-preparado.jpg"
+# Esperado: 201 JSON; archivo en public/img/preparados/<id>_test-preparado.jpg
+
+# 4) Fincas
+curl -X POST "{{base_url}}/api/fincas" \
+  -F nombre="El Prado" \
+  -F ubicacion="Rionegro" \
+  -F observaciones="Alta" \
+  -F imagen=@"/path/to/test-finca.jpg"
+# Esperado: 201 JSON; archivo en public/img/finca/<id>_test-finca.jpg
+```
+
+Resultado de verificación manual (completar):
+- [ ] Animales: archivo presente y nombre correcto.
+- [ ] Vegetales: archivo presente y nombre correcto.
+- [ ] Preparados: archivo presente y nombre correcto.
+- [ ] Fincas: archivo presente y nombre correcto.
 
 ## 11) Cambios aplicados (resumen)
 - Archivos añadidos:

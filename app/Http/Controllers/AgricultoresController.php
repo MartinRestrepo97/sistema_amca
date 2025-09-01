@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Agricultor;
-use App\AgricultorFinca;
-use App\AgricultorAnimal;
-use App\AgricultorVegetal; 
-use App\AgricultorPreparado;
-use App\Finca;
-use App\Animal;
-use App\Preparado;
-use App\Vegetal;
+use App\Models\Agricultor;
+use App\Models\AgricultorFinca;
+use App\Models\AgricultorAnimal;
+use App\Models\AgricultorVegetal; 
+use App\Models\AgricultorPreparado;
+use App\Models\Finca;
+use App\Models\Animal;
+use App\Models\Preparado;
+use App\Models\Vegetal;
 
 class AgricultoresController extends Controller
 
@@ -43,14 +43,21 @@ class AgricultoresController extends Controller
         $registro->documento = $request['documento'];    
         $registro->save();
 
-        if (isset($_FILES["imagen"]["tmp_name"]) && $_FILES["imagen"]["tmp_name"] !='') {
+        if (isset($_FILES["imagen"]["tmp_name"]) && $_FILES["imagen"]["tmp_name"] != '') {
             $tmp_name = $_FILES["imagen"]["tmp_name"];
             $name = $_FILES["imagen"]["name"];
-            
-            move_uploaded_file($tmp_name, "img/agricultores/".$registro->id."_$name");
+            $fileName = $registro->id . "_" . $name;
 
-            $registro->imagen = $registro->id."_$name";
-            $registro->save();
+            $destDir = public_path('img/agricultores');
+            if (!is_dir($destDir)) {
+                @mkdir($destDir, 0755, true);
+            }
+
+            $destPath = $destDir . DIRECTORY_SEPARATOR . $fileName;
+            if (@move_uploaded_file($tmp_name, $destPath)) {
+                $registro->imagen = $fileName; // La vista debe usar "/img/agricultores/{$registro->imagen}"
+                $registro->save();
+            }
         }
         
 

@@ -9,10 +9,12 @@ class Finca extends Model
 {
     use HasFactory;
     
-    protected $table = 'fincas';
+    protected $table = 'finca';
     protected $fillable = [
         'nombre', 
-        'ubicacion'
+        'ubicacion',
+        'propietario',
+        'imagen',
     ];
     public $timestamps = true;
 

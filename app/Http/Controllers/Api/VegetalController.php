@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Vegetal;
+use App\Models\Vegetal;
 use Illuminate\Support\Facades\Validator;
 
 class VegetalController extends Controller
@@ -38,7 +38,9 @@ class VegetalController extends Controller
         if ($request->hasFile('imagen')) {
             $file = $request->file('imagen');
             $name = $vegetal->id . '_' . $file->getClientOriginalName();
-            $file->move(public_path('img/vegetales'), $name);
+            $destDir = public_path('img/vegetales');
+            if (!is_dir($destDir)) { @mkdir($destDir, 0755, true); }
+            $file->move($destDir, $name);
             $vegetal->imagen = $name;
             $vegetal->save();
         }
@@ -63,7 +65,9 @@ class VegetalController extends Controller
         if ($request->hasFile('imagen')) {
             $file = $request->file('imagen');
             $name = $vegetal->id . '_' . $file->getClientOriginalName();
-            $file->move(public_path('img/vegetales'), $name);
+            $destDir = public_path('img/vegetales');
+            if (!is_dir($destDir)) { @mkdir($destDir, 0755, true); }
+            $file->move($destDir, $name);
             $vegetal->imagen = $name;
             $vegetal->save();
         }

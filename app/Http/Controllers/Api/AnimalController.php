@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Animal;
+use App\Models\Animal;
 use Illuminate\Support\Facades\Validator;
 
 class AnimalController extends Controller
@@ -47,7 +47,9 @@ class AnimalController extends Controller
         if ($request->hasFile('imagen')) {
             $file = $request->file('imagen');
             $name = $animal->id . '_' . $file->getClientOriginalName();
-            $file->move(public_path('img/animales'), $name);
+            $destDir = public_path('img/animales');
+            if (!is_dir($destDir)) { @mkdir($destDir, 0755, true); }
+            $file->move($destDir, $name);
             $animal->imagen = $name;
             $animal->save();
         }
@@ -81,7 +83,9 @@ class AnimalController extends Controller
         if ($request->hasFile('imagen')) {
             $file = $request->file('imagen');
             $name = $animal->id . '_' . $file->getClientOriginalName();
-            $file->move(public_path('img/animales'), $name);
+            $destDir = public_path('img/animales');
+            if (!is_dir($destDir)) { @mkdir($destDir, 0755, true); }
+            $file->move($destDir, $name);
             $animal->imagen = $name;
             $animal->save();
         }

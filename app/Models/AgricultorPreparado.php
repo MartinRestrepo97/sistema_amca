@@ -8,17 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class AgricultorPreparado extends Model
 {
     use HasFactory;
-    protected $table = 'agricultor_preparados';
+    protected $table = 'agricultores_preparados';
     protected $fillable = [
-        'agricultor_id', 
-        'preparado_id'
+        'id_agricultor', 
+        'id_preparado'
     ];
     public function agricultor()
     {
-        return $this->belongsTo(Agricultor::class);
+        return $this->belongsTo(Agricultor::class, 'id_agricultor');
     }
     public function preparado()
     {
-        return $this->belongsTo(Preparado::class);
+        return $this->belongsTo(Preparado::class, 'id_preparado');
     }
 }

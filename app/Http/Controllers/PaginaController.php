@@ -6,15 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use App\Agricultor;
-use App\Animal;
-use App\Finca;
-use App\Preparado;
-use App\Vegetal;
-use App\AgricultorFinca;
-use App\AgricultorAnimal;
-use App\AgricultorVegetal; 
-use App\AgricultorPreparado;
+use App\Models\Agricultor;
+use App\Models\Animal;
+use App\Models\Finca;
+use App\Models\Preparado;
+use App\Models\Vegetal;
+use App\Models\AgricultorFinca;
+use App\Models\AgricultorAnimal;
+use App\Models\AgricultorVegetal; 
+use App\Models\AgricultorPreparado;
 use Illuminate\Support\Facades\DB;
 
 class PaginaController extends Controller
@@ -365,14 +365,21 @@ class PaginaController extends Controller
         $registro->documento = $request['documento'];    
         $registro->save();
 
-        if (isset($_FILES["imagen"]["tmp_name"]) && $_FILES["imagen"]["tmp_name"] !='') {
+        if (isset($_FILES["imagen"]["tmp_name"]) && $_FILES["imagen"]["tmp_name"] != '') {
             $tmp_name = $_FILES["imagen"]["tmp_name"];
             $name = $_FILES["imagen"]["name"];
-            
-            move_uploaded_file($tmp_name, "img/agricultores/".$registro->id."_$name");
+            $fileName = $registro->id . "_" . $name;
 
-            $registro->imagen = $registro->id."_$name";
-            $registro->save();
+            $destDir = public_path('img/agricultores');
+            if (!is_dir($destDir)) {
+                @mkdir($destDir, 0755, true);
+            }
+
+            $destPath = $destDir . DIRECTORY_SEPARATOR . $fileName;
+            if (@move_uploaded_file($tmp_name, $destPath)) {
+                $registro->imagen = $fileName; // La vista debe usar "/img/agricultores/{$registro->imagen}"
+                $registro->save();
+            }
         }
         
 
@@ -449,14 +456,14 @@ class PaginaController extends Controller
         foreach($fincas_agrega as $fa) {
             $f = new AgricultorAnimal();
             $f->id_agricultor = $request['id_agricultor'];
-            $f->id_finca = $fa;
+            $f->id_animal = $fa;
             $f->save();
         }
         return $fincas_agrega;
     }
 
     public function animales_agricultor_eliminar(Request $request) {
-        $contenedor = AgricultorFinca::findOrFail($request['id_registro']);        
+        $contenedor = AgricultorAnimal::findOrFail($request['id_registro']);        
         $contenedor->delete();
     }
 //------------------------------------------------------------------------------------
@@ -486,36 +493,30 @@ class PaginaController extends Controller
         foreach($fincas_agrega as $fa) {
             $f = new AgricultorVegetal();
             $f->id_agricultor = $request['id_agricultor'];
-            $f->id_finca = $fa;
+            $f->id_vegetal = $fa;
             $f->save();
         }
         return $fincas_agrega;
     }
 
     public function vegetales_agricultor_eliminar(Request $request) {
-        $contenedor = AgricultorFinca::findOrFail($request['id_registro']);        
+        $contenedor = AgricultorVegetal::findOrFail($request['id_registro']);        
         $contenedor->delete();
     }
 //------------------------------------------------------------------------------------
     public function get_agricultor_preparados(Request $request) {
-
-        $$agricultorPreparados = AgricultorPreparado::select("agricultores_preparados.id","agricultores_preparados.id_agricultor","agricultores_preparados.id_preparado","preparados.nombre", "preparados.preparacion")
+        $agricultorPreparados = AgricultorPreparado::select("agricultores_preparados.id","agricultores_preparados.id_agricultor","agricultores_preparados.id_preparado","preparados.nombre", "preparados.preparacion")
         ->join('preparados','agricultores_preparados.id_preparado','preparados.id')
         ->where('id_agricultor',$request['id_agricultor'])->get();
-
-        $$id_preparados = array();
+        $id_preparados = array();
         $preparados = array();
-        if(count($$agricultorPreparados)>0) {
-
-            foreach($$agricultorPreparados as $f) {
-                $$id_preparados[] = $f->id_preparado;
+        if(count($agricultorPreparados)>0) {
+            foreach($agricultorPreparados as $f) {
+                $id_preparados[] = $f->id_preparado;
             }
-
-            
         }
-
-        $preparados = Vegetal::whereNotIn('id',$$id_preparados)->orderBy('nombre')->orderBy('preparacion')->get();
-        return ['agricultorpreparados' => $$agricultorPreparados, 'preparados' => $preparados ];
+        $preparados = Preparado::whereNotIn('id',$id_preparados)->orderBy('nombre')->orderBy('preparacion')->get();
+        return ['agricultorpreparados' => $agricultorPreparados, 'preparados' => $preparados ];
     }
 
     public function preparados_agricultor_guardar(Request $request) {
@@ -524,14 +525,14 @@ class PaginaController extends Controller
         foreach($fincas_agrega as $fa) {
             $f = new AgricultorPreparado();
             $f->id_agricultor = $request['id_agricultor'];
-            $f->id_finca = $fa;
+            $f->id_preparado = $fa;
             $f->save();
         }
         return $fincas_agrega;
     }
 
     public function preparados_agricultor_eliminar(Request $request) {
-        $contenedor = AgricultorFinca::findOrFail($request['id_registro']);        
+        $contenedor = AgricultorPreparado::findOrFail($request['id_registro']);        
         $contenedor->delete();
     }
     

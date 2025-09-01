@@ -8,17 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class AgricultorVegetal extends Model
 {
     use HasFactory;
-    protected $table = 'agricultor_vegetales';
+    protected $table = 'agricultores_vegetales';
     protected $fillable = [
-        'agricultor_id', 
-        'vegetal_id'
+        'id_agricultor', 
+        'id_vegetal'
     ];
     public function agricultor()
     {
-        return $this->belongsTo(Agricultor::class);
+        return $this->belongsTo(Agricultor::class, 'id_agricultor');
     }
     public function vegetal()
     {
-        return $this->belongsTo(Vegetal::class);
+        return $this->belongsTo(Vegetal::class, 'id_vegetal');
     }
 }

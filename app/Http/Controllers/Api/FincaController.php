@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Finca;
+use App\Models\Finca;
 use Illuminate\Support\Facades\Validator;
 
 class FincaController extends Controller
@@ -25,7 +25,7 @@ class FincaController extends Controller
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string|max:255',
             'ubicacion' => 'nullable|string',
-            'propietario' => 'nullable|string',
+            'propietario' => 'required|string',
             'imagen' => 'nullable|file|image|max:4096',
         ]);
         if ($validator->fails()) {
@@ -38,7 +38,9 @@ class FincaController extends Controller
         if ($request->hasFile('imagen')) {
             $file = $request->file('imagen');
             $name = $item->id . '_' . $file->getClientOriginalName();
-            $file->move(public_path('img/finca'), $name);
+            $destDir = public_path('img/finca');
+            if (!is_dir($destDir)) { @mkdir($destDir, 0755, true); }
+            $file->move($destDir, $name);
             $item->imagen = $name;
             $item->save();
         }
@@ -63,7 +65,9 @@ class FincaController extends Controller
         if ($request->hasFile('imagen')) {
             $file = $request->file('imagen');
             $name = $item->id . '_' . $file->getClientOriginalName();
-            $file->move(public_path('img/finca'), $name);
+            $destDir = public_path('img/finca');
+            if (!is_dir($destDir)) { @mkdir($destDir, 0755, true); }
+            $file->move($destDir, $name);
             $item->imagen = $name;
             $item->save();
         }
