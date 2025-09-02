@@ -387,13 +387,50 @@ curl -X POST "{{base_url}}/api/fincas" \
   -F observaciones="Alta" \
   -F imagen=@"/path/to/test-finca.jpg"
 # Esperado: 201 JSON; archivo en public/img/finca/<id>_test-finca.jpg
-```
 
 Resultado de verificación manual (completar):
-- [ ] Animales: archivo presente y nombre correcto.
-- [ ] Vegetales: archivo presente y nombre correcto.
-- [ ] Preparados: archivo presente y nombre correcto.
-- [ ] Fincas: archivo presente y nombre correcto.
+ - [x] Animales: archivo presente y nombre correcto.
+ - [x] Vegetales: archivo presente y nombre correcto.
+ - [x] Preparados: archivo presente y nombre correcto.
+ - [x] Fincas: archivo presente y nombre correcto.
+
+Evidencia rápida (2025-09-01 17:43 -05):
+- Animales → 201; imagen: `1_img4.png` guardada en `public/img/animales/`.
+- Vegetales → 201; imagen: `1_img1.png` guardada en `public/img/vegetales/`.
+- Preparados → 201; imagen: `1_img2.png` guardada en `public/img/preparados/`.
+- Fincas → 201; imagen: `1_img3.png` guardada en `public/img/finca/`.
+
+### 8.1 Evidencia de pruebas automatizadas (PHPUnit)
+
+- Fecha/Hora: 2025-09-01 18:39 -05
+- Entorno de pruebas: `.env.testing` con SQLite en memoria, `APP_KEY` válido.
+- Comando ejecutado: `/Applications/MAMP/bin/php/php8.2.26/bin/php vendor/bin/phpunit`
+- Resultado: OK (14 tests, 54 assertions)
+
+Tests relevantes:
+- `tests/Feature/ApiImageUploadTest.php`
+  - Crea registros vía `/api/animales`, `/api/vegetales`, `/api/preparados`, `/api/fincas` con `imagen` simulada.
+  - Verifica respuesta 201 y existencia de archivos en:
+    - `public/img/animales/`
+    - `public/img/vegetales/`
+    - `public/img/preparados/`
+    - `public/img/finca/`
+
+- `tests/Feature/ApiCrudTest.php`
+  - Update/Delete por recurso usando `PATCH` y `DELETE` de `Route::apiResource(...)`:
+    - `/api/animales/{id}`
+    - `/api/vegetales/{id}`
+    - `/api/preparados/{id}`
+    - `/api/fincas/{id}`
+  - Validación 422 en creación cuando faltan campos requeridos:
+    - Animales: `especie` (y DB requiere `raza`, `alimentacion`, `cuidados`, `reproduccion`).
+    - Vegetales: `especie`.
+    - Preparados: `nombre` (DB requiere `preparacion`).
+    - Fincas: `nombre` y `propietario` (DB requiere también `ubicacion`).
+
+Notas:
+- Las pruebas usan `RefreshDatabase` para migrar en memoria y aislar estado.
+- Las cargas de imagen de tests escriben en `public/img/...`; se recomienda migrar a `Storage::putFile` + `Storage::fake()` si se desea evitar IO real en el futuro.
 
 ## 11) Cambios aplicados (resumen)
 - Archivos añadidos:

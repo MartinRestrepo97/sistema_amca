@@ -12,7 +12,9 @@ class Preparado extends Model
     protected $table = 'preparados';
     protected $fillable = [
         'nombre', 
-        'descripcion'
+        'preparacion',
+        'observaciones',
+        'imagen',
     ];
     public $timestamps = true;
 

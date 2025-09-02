@@ -57,9 +57,9 @@
 - [ ] Revisión de código
 
 ## 8. Pruebas
-- [ ] Configurar PHPUnit
+- [x] Configurar PHPUnit
 - [ ] Escribir pruebas unitarias
-- [ ] Escribir pruebas de integración
+- [x] Escribir pruebas de integración
 - [ ] Pruebas de aceptación
 - [ ] Pruebas de rendimiento
 
@@ -85,7 +85,7 @@
 ---
 
 ## Progreso General
-- [ ] 0% Completado
+- [ ] 22% Completado (16/71 ítems) — actualizado 2025-09-01 18:39
 
 ## Notas
 - Revisar periódicamente el progreso
@@ -113,6 +113,11 @@
   - `AgricultorVegetal` → tabla `agricultores_vegetales`, columnas `id_agricultor`, `id_vegetal`, relaciones con FKs explícitos.
   - `AgricultorPreparado` → tabla `agricultores_preparados`, columnas `id_agricultor`, `id_preparado`, relaciones con FKs explícitos.
 
+- [x] Modelo `Finca` alineado a tabla `finca` y fillables: `nombre`, `ubicacion`, `propietario`, `imagen`.
+- [x] Modelos `Vegetal` y `Preparado` con fillables alineados a sus migraciones y controladores.
+- [x] Migraciones al día: `php artisan migrate` (MAMP PHP 8.2.26) → Nothing to migrate.
+- [x] Home `/pagina_home` cargando sin errores tras correcciones de modelo/tabla `finca`.
+
 Pendientes:
- - [ ] Pruebas manuales de carga de imágenes en endpoints API y vistas.
- - [x] Revisar y limpiar `app/User.php` si ya se usa `App\Models\User` en toda la app.
+  - [x] Pruebas manuales de carga de imágenes en endpoints API y vistas.
+  - [x] Revisar y limpiar `app/User.php` si ya se usa `App\Models\User` en toda la app.
