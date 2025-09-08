@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Preparado;
+use App\Models\Preparado;
 use Illuminate\Support\Facades\Validator;
 
 class PreparadoController extends Controller
@@ -38,7 +38,9 @@ class PreparadoController extends Controller
         if ($request->hasFile('imagen')) {
             $file = $request->file('imagen');
             $name = $item->id . '_' . $file->getClientOriginalName();
-            $file->move(public_path('img/preparados'), $name);
+            $destDir = public_path('img/preparados');
+            if (!is_dir($destDir)) { @mkdir($destDir, 0755, true); }
+            $file->move($destDir, $name);
             $item->imagen = $name;
             $item->save();
         }
@@ -63,7 +65,9 @@ class PreparadoController extends Controller
         if ($request->hasFile('imagen')) {
             $file = $request->file('imagen');
             $name = $item->id . '_' . $file->getClientOriginalName();
-            $file->move(public_path('img/preparados'), $name);
+            $destDir = public_path('img/preparados');
+            if (!is_dir($destDir)) { @mkdir($destDir, 0755, true); }
+            $file->move($destDir, $name);
             $item->imagen = $name;
             $item->save();
         }

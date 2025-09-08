@@ -11,8 +11,10 @@ class Vegetal extends Model
     
     protected $table = 'vegetales';
     protected $fillable = [
-        'nombre', 
-        'tipo'
+        'especie',
+        'cultivo',
+        'observaciones',
+        'imagen',
     ];
     public $timestamps = true;
 

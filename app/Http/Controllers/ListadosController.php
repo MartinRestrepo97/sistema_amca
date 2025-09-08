@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Animal;
-use App\Vegetal;
+use App\Models\Animal;
+use App\Models\Vegetal;
 
 class ListadosController extends Controller
 {

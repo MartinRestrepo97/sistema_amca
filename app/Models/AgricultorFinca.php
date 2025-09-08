@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class AgricultorFinca extends Model
 {
     use HasFactory;
-    protected $table = 'agricultor_fincas';
+    protected $table = 'agricultores_fincas';
     protected $fillable = [
-        'agricultor_id', 
-        'finca_id'
+        'id_agricultor', 
+        'id_finca'
     ];
     public function agricultor()
     {

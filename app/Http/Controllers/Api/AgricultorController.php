@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Agricultor;
+use App\Models\Agricultor;
 use Illuminate\Support\Facades\Validator;
 
 class AgricultorController extends Controller
@@ -39,7 +39,9 @@ class AgricultorController extends Controller
         if ($request->hasFile('imagen')) {
             $file = $request->file('imagen');
             $name = $item->id . '_' . $file->getClientOriginalName();
-            $file->move(public_path('img/agricultores'), $name);
+            $destDir = public_path('img/agricultores');
+            if (!is_dir($destDir)) { @mkdir($destDir, 0755, true); }
+            $file->move($destDir, $name);
             $item->imagen = $name;
             $item->save();
         }
@@ -65,7 +67,9 @@ class AgricultorController extends Controller
         if ($request->hasFile('imagen')) {
             $file = $request->file('imagen');
             $name = $item->id . '_' . $file->getClientOriginalName();
-            $file->move(public_path('img/agricultores'), $name);
+            $destDir = public_path('img/agricultores');
+            if (!is_dir($destDir)) { @mkdir($destDir, 0755, true); }
+            $file->move($destDir, $name);
             $item->imagen = $name;
             $item->save();
         }
