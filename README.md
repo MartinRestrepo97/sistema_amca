@@ -2,6 +2,8 @@
 
 ## Resumen técnico del proyecto
 
+![Asset url](assets/evidencia.pdf)
+
 Este es un proyecto Laravel 12 (PHP >= 8.2) con frontend compilado por Vite.
 
 - __Backend__: Laravel `^12.0`, autenticación con `laravel/ui` (`Auth::routes()`), colas/sesiones/cache en base de datos, logging por stack.
