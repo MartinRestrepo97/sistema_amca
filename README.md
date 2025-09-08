@@ -2,7 +2,11 @@
 
 ## Resumen técnico del proyecto
 
-![Asset url](assets/evidencia.pdf)
+![Logo url](assets/evidencia_page-0001.jpg)
+![Logo url](assets/evidencia_page-0002.jpg)
+![Logo url](assets/evidencia_page-0003.jpg)
+![Logo url](assets/evidencia_page-0004.jpg)
+
 
 Este es un proyecto Laravel 12 (PHP >= 8.2) con frontend compilado por Vite.
 
